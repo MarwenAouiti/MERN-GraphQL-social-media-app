@@ -34,7 +34,7 @@ module.exports = {
       // check if current user is authenticated
       const user = checkAuth(context);
 
-      if (body.trim === '') {
+      if (body.trim() === '') {
         throw new Error('Post should not be empty!');
       }
       // create the post
