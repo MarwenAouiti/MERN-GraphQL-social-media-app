@@ -15,7 +15,6 @@ function PostForm() {
       const data = proxy.readQuery({
         query: FETCH_POSTS_QUERY,
       });
-      //data.getPosts = [result.data.createPost, ...data.getPosts];
       proxy.writeQuery({
         query: FETCH_POSTS_QUERY,
         data: {
@@ -30,20 +29,30 @@ function PostForm() {
     createPost();
   }
   return (
-    <Form onSubmit={onSubmit}>
-      <h2>What's on your mind?</h2>
-      <Form.Field>
-        <Form.Input
-          placeholder="Hi World!"
-          name="body"
-          onChange={onChange}
-          values={values.body}
-        />
-        <Button type="submit" color="teal">
-          Create
-        </Button>
-      </Form.Field>
-    </Form>
+    <>
+      <Form onSubmit={onSubmit}>
+        <h2>What's on your mind?</h2>
+        <Form.Field>
+          <Form.Input
+            placeholder="Hi World!"
+            name="body"
+            onChange={onChange}
+            values={values.body}
+            error={error ? true : false}
+          />
+          <Button type="submit" color="teal">
+            Create
+          </Button>
+        </Form.Field>
+      </Form>
+      {error && (
+        <div className="ui error message">
+          <ul className="list">
+            <li>{error.graphQLErrors[0].message}</li>
+          </ul>
+        </div>
+      )}
+    </>
   );
 }
 
